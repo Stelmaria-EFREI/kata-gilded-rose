@@ -22,7 +22,7 @@ class GildedRoseTest {
         assertEquals(19,foo.sellIn);
         assertEquals(9, foo.quality);
     }
-    
+
     @Test
     public void backstagePassValueIncreasesButCantBeAbove50() {
         Item[] items = new Item[]{
@@ -94,6 +94,28 @@ class GildedRoseTest {
             new Item("An item", 9, 9),
             new Item("Another item", -1, 8),
             new Item("Yet another item", 9, 0),
+        };
+
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        for (int i = 0; i < 3; i++) {
+            assertEquals(updatedItems[0].toString(), app.items[0].toString());
+        }
+    }
+
+    @Test
+    public void conjuredItemsValueDecreasesFasterButCantBeUnder0 () {
+        Item[] items = new Item[]{
+            new Item("Conjured item", 10, 10),
+            new Item("Conjured item", 0, 10),
+            new Item("Conjured item", 10, 0),
+        };
+
+        Item[] updatedItems = new Item[]{
+            new Item("Conjured item", 9, 8),
+            new Item("Conjured item", -1, 6),
+            new Item("Conjured item", 9, 0),
         };
 
         GildedRose app = new GildedRose(items);

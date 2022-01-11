@@ -29,6 +29,9 @@ class GildedRose {
                 updateQualityForBackstagePass(item);
             } else if (LEGENDARY_ITEM.contains((item.name))) {
                 // Do nothing.
+            } else if (item.name.startsWith("Conjured ")) {
+                item.sellIn -= 1;
+                updateQualityForConjuredItem(item);
             } else {
                 item.sellIn -= 1;
                 updateQualityForDefaultItem(item);
@@ -65,6 +68,16 @@ class GildedRose {
             item.quality -= 1;
         } else {
             item.quality -= 2;
+        }
+
+        minimumItemQuality(item, 0);
+    }
+
+    private void updateQualityForConjuredItem(Item item) {
+        if (item.sellIn >= 0) {
+            item.quality -= 2;
+        } else {
+            item.quality -= 4;
         }
 
         minimumItemQuality(item, 0);
